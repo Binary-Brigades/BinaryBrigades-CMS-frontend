@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
+import useAuthToken from "../hooks/useAuth";
 
 function Login() {
+   const { updateAuthToken, getItem } = useAuthToken();
+   const token  = getItem();
+   useEffect(() => {
+     if (token) {
+       window.location.href = "/";
+     }
+   }, []);
+
+
   const [formData, setFormData] = useState({
     password: "",
     email: "",
@@ -29,8 +39,9 @@ function Login() {
         });
         const data = await response.json();
 
-        const access_token = data.key;
-        localStorage.setItem("user", access_token);
+        const access_token = data.access_token;
+        updateAuthToken(access_token);
+        console.log("Login successful", data);
         window.location.href = "/";
       } else if (response.status === 401) {
         toast.error("Login failed, invalid credentials", {
