@@ -1,12 +1,34 @@
-// https://tumeiget.vercel.app/account/login/
-import React from 'react'
+import { useState } from "react";
 
-async function useAuth({formData}) {
-  const response = await fetch("https://tumeiget.vercel.app/account/login/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
-  });
-}
+const useAuthToken = () => {
+  // Use state to store the authentication token
+  const [authToken, setAuthToken] = useState(null);
 
-export default useAuth
+  // Use useEffect to persist the token in local storage
+
+  const getItem = () => {
+    const token = localStorage.getItem("authToken");
+    return token;
+  };
+  const removeItem = () => {
+    localStorage.removeItem("savedQuestions");
+    localStorage.removeItem("templateId");
+  };
+  // Function to update the authentication token
+  const updateAuthToken = (newToken) => {
+    // Update the token in the state
+    setAuthToken(newToken);
+
+    // Store the token in local storage for persistence
+    localStorage.setItem("authToken", newToken);
+  };
+
+  const clearAuthToken = () => {
+    setAuthToken(null);
+    localStorage.removeItem("authToken");
+  };
+
+  return { updateAuthToken, clearAuthToken, getItem, removeItem };
+};
+
+export default useAuthToken;
