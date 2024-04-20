@@ -31,11 +31,8 @@ function Login() {
 
         const access_token = data.key;
         localStorage.setItem("user", access_token);
-
-        // Store the access token in local storage (you can also use cookies)
-        window.location.href = "/Home";
+        window.location.href = "/";
       } else if (response.status === 401) {
-        // Handle authentication failure (e.g., display an error message)
         toast.error("Login failed, invalid credentials", {
           id: notification,
         });
@@ -80,7 +77,7 @@ function Login() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 2 }}
-          class="mx-auto p-4 md:p-8 rounded-md md:rounded-xl space-y-4 bg-[#E0EBFD]"
+          className="mx-auto p-4 md:p-8 rounded-md md:rounded-xl space-y-4 bg-[#E0EBFD]"
         >
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">welcome back!! Login</h1>
