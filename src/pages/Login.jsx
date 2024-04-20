@@ -4,20 +4,24 @@ import toast, { Toaster } from "react-hot-toast";
 
 function Login() {
   const [formData, setFormData] = useState({
-    username: "",
     password: "",
+    email: "",
   });
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const notification = toast.loading("Logging in...");
     try {
       const response = await fetch(
-        "https://tumeiget.vercel.app/account/login/",
+        "https://portfolio-cms-nine.vercel.app/api/v1/auth/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
         }
-      ); // Add a comma
+      ); // Send a POST request
 
       if (response.status === 200) {
         toast.success("Login successful", {
@@ -41,7 +45,6 @@ function Login() {
         toast.error("An error occurred" + response.status, {
           id: notification,
         });
-        console.error("Unexpected status code:", response.status);
       }
     } catch (error) {
       // Add a catch block here
@@ -58,6 +61,7 @@ function Login() {
       ...formData,
       [name]: value,
     });
+    console.log(formData);
   };
   return (
     <div className="w-screen  flex flex-row items-center justify-center bg-white">
@@ -68,7 +72,7 @@ function Login() {
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 2 }}
-            src="/tumeiget.png"
+            src="/cms.png"
             className="w-[50%]"
           />
         </div>
@@ -84,28 +88,28 @@ function Login() {
               Enter your email below to login to your account
             </p>
           </div>
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form className="space-y-4" >
             <div className="space-y-2">
               <label
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                for="username"
+                htmlFor="email"
               >
-                username
+                Email
               </label>
               <input
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                placeholder="Admin123"
+                placeholder="maich@2021"
                 required={true}
-                name="username"
+                name="email"
                 onChange={handleChange}
-                type="text"
+                type="email"
               />
             </div>
             <div className="space-y-2">
               <div className="flex items-center">
                 <label
                   className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  for="password"
+                  htmlFor="password"
                 >
                   Password
                 </label>
@@ -122,6 +126,7 @@ function Login() {
             </div>
             <button
               type="submit"
+              onClick={handleSubmit}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-500 hover:bg-blue-600 text-white h-10 px-4 py-2 w-full"
             >
               Login
@@ -131,21 +136,14 @@ function Login() {
       </div>
       <div className=" w-[50%] relative hidden md:block">
         <motion.img
-          // initial={{ opacity: 0, x: 1000 }}
-          // animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 2 }}
           animate={{
             scale: [0.8, 1, 1.3, 1],
           }}
           className="h-screen blur-md w-[100%]	 object-cover "
-          src="/loginimg.jpg"
+          src="/cms.png"
         />
-        <div className="absolute top-0  w-[100%] h-screen flex flex-col justify-center items-center text-white">
-          <p className="text-5xl font-bold mb-4">Hello Admin</p>
-          <a href="/" className="text-[#E0EBFD]">
-            Go to search page screen
-          </a>
-        </div>
+        
       </div>
     </div>
   );

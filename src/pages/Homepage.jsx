@@ -1,8 +1,11 @@
 import React from 'react'
+import Header from '../components/login/Header'
 
 function Homepage() {
   return (
-    <div>Homepage</div>
+    <div>
+      <Header />
+    </div>
   )
 }
 
