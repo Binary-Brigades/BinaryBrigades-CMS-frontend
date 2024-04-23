@@ -51,7 +51,7 @@ function Header() {
       animate={hidden ? "hidden" : "visible"}
       variants={variants}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="w-screen sticky top-0 justify-center items-center flex flex-col "
+      className="w-screen z-50 sticky top-0 justify-center items-center flex flex-col "
     >
       <Toaster />
       <div className="w-[90%] max-w-[780px] flex flex-row justify-between bg-blue-200 py-5 px-4 rounded-br-xl md:rounded-br-2xl md:rounded-bl-2xl rounded-bl-xl">
