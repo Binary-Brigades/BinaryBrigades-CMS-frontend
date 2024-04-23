@@ -76,13 +76,9 @@ function Login() {
       <Toaster />
       <div className="p-4 md:p-8 flex flex-col md:w-[50%]  items-center justify-center">
         <div className="w-full justify-center items-center flex">
-          <motion.img
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 2 }}
-            src="/cms.png"
-            className="w-[50%]"
-          />
+          <motion.h1 className="md:text-2xl my-10 text-xl font-semibold lg:text-3xl text-blue-500">
+          Binary-Brigades CMS
+        </motion.h1>
         </div>
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}

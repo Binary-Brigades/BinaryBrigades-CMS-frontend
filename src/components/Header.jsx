@@ -55,9 +55,9 @@ function Header() {
     >
       <Toaster />
       <div className="w-[90%] max-w-[780px] flex flex-row justify-between bg-blue-200 py-5 px-4 rounded-br-xl md:rounded-br-2xl md:rounded-bl-2xl rounded-bl-xl">
-        <div className="md:text-2xl text-xl font-semibold lg:text-3xl text-blue-500">
+        <h1 className="md:text-2xl text-xl font-semibold lg:text-3xl text-blue-500">
           Binary-Brigades CMS
-        </div>
+        </h1>
         <div className="flex flex-row gap-2 md:gap-4 justify-center items-center ">
           <p className="hidden md:block text-lg font-semibold text-gray-500">
             Hello Maich
